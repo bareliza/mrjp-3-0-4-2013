@@ -1,0 +1,16 @@
+int main(){
+  string a="
+  aaa!
+  ";
+  
+  string b="
+   \"ttt
+   \"rrr
+   ";
+   
+   string c=" \" abc \" cde ";
+   string e="";
+   string d="abc";
+
+   return 0;
+}

@@ -1,0 +1,9 @@
+int main(){
+    printInt(suma(2));
+    return 0;
+}
+
+int suma(int i){
+    if(i>0)return i+suma(i-1);
+    else return 0;
+}

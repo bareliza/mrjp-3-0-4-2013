@@ -1,0 +1,10 @@
+215c215
+<   Bad $ "syntax error at " ++ tokenPos ts ++ 
+---
+>   Bad $ tokenPos ts ++ "Blad skladni" ++
+218,219c218,219
+<     [Err _] -> " due to lexer error"
+<     _ -> " before " ++ unwords (map (id . prToken) (take 4 ts))
+---
+>     [Err _] -> " w skutek bledu lexera"
+>     _ -> " przed " ++ unwords (map (id . prToken) (take 4 ts))

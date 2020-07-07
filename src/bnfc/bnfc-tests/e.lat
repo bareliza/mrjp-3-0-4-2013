@@ -1,0 +1,12 @@
+int main(){
+  int a=(klasa2)null;
+
+  klasa2 b=(klasa3)null;
+
+  klasa3 c=new klasa3;
+  klasa4 d=(klasa4)new klasa5;
+  klasa4 e=(klasa4)(new klasa5);
+  
+
+  a=(c.b.c+d.a+e)*3;
+}

@@ -1,0 +1,37 @@
+Liczyć maks. ilość lokalnych zmiennych w funkcji
+Liczyć maks. ilość tymczasowych zmiennych w funkcji
+Sprawdzić poprawność kolejności przekazywania wielu argumentów funkcji
+Generować funkcje init dla każdej klasy
+Generować tablice metod wirtualnych dla każdej klasy
+  Na zerowym miejscu tablicy metoda init
+Zastanowić się nad możliwymi błędami kompilacji ignorującej rzutowanie
+  Czy może mieć jakiś sens rzutowanie na coś innego niż null?
+  Może i może, ale jak to kompilować?
+  Chyba jednak oleję.
++ compileExpr dla ERel, EAnd, EOr
+
+Dla klas:
+Uwzględniać dłuższe niż jeden ciągi [FieldSelector]
+  zarówno w compileExpr, jak i w getExprType
+
+UWAGA: w JVMc jest błąd - powiela etykiety przy >1 wyrażeniu używającym etykiet
+i będącym argumentem funkcji
+
+Wpisać this do zmiennych lokalnych?, = 8(%ebp)
+
+Sprawdzić jak powstanie budowanie tablic wirtualnych metod klas
+  i ogólnie budowanie klas: Czy budowane metody mają 0-owy argument this, a
+  pozostałe argumenty z numerami 1,2 itd.
+
++ WAŻNE! Poprawić getFunRetClass
+
+neutral string = "", PString pozycja (1,1) - dogenerować
+
+Wygenerować etykietę plus napis dla każdej stałej napisowej w kodzie.
+
+enterTopDef: Poprawic, zmienic, rozszerzyc (hierarchia klas)
+
+Env: dla kolejnej funkcji zerować:
+  'parametrow', 'lokalnych','
+  albo raczej przenosic tylko informacje istotne 
+  (etykiety, info o klasach i funkcjach)

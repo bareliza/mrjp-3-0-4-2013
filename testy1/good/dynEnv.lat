@@ -1,0 +1,17 @@
+int main()
+{
+  int x = 0;
+  x++;
+  x++;
+  x=x*8;
+  printInt(x);
+  {
+    string x = "O";
+    x=x+"O";
+    printString(x);
+  }
+  x=x/4;
+  printInt(x);
+
+  return 0;
+}

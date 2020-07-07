@@ -1,0 +1,6 @@
+int main(){
+
+  if("a"==true)i=i+1;
+
+  return 0;
+}

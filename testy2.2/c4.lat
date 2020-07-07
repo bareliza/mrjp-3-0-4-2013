@@ -1,0 +1,10 @@
+void p(int i, int j, int k){
+  printInt(k);
+}
+
+int main(){
+  int i=1,j=2,k=3;
+  
+  p(i,i+j*k,i+j);
+  return 0;
+}

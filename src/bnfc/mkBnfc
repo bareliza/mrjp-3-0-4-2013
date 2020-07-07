@@ -1,0 +1,4 @@
+bnfc -m -haskell Latte.cf
+patch LexLatte.x diff/LexLatte2.diff
+patch ParLatte.y diff/ParLatte.diff
+make

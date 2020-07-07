@@ -1,0 +1,11 @@
+void b(){
+}
+
+int main(){
+   error(1,2);
+   readInt(3);
+   readString("abc");
+   b(1,2);
+   b();
+   b(3);
+}

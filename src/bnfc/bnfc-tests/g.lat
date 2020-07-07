@@ -1,0 +1,60 @@
+class klasa{
+  klasa a(){
+    b=new klasa;
+    c=7;
+    return this;
+  }
+  klasa b;
+  klasa b(int a, int b){
+    b.c=c*4;
+    d=c*5;
+    return b;
+  }
+  klasa c(){
+    return b;
+  }
+  int c;
+  int d;
+}
+
+
+klasa3 b(){
+  klasa3 a=new klasa3;
+  a.c=new klasa3;
+  a.c.d = 4;
+  return a;
+}
+
+class klasa3
+{
+   klasa3 c;
+   int d;
+   klasa3 b(){
+      return this;
+   }
+}
+
+class klasa2{
+  klasa2 b(int a, int b){
+    c=new klasa2;
+    c.d = a+b;
+    return this;
+  }
+  klasa2 c;
+  int d;
+  int d(int a){
+    return d*a;
+  }
+}
+
+
+int main(){
+  klasa a=new klasa;
+  klasa2 b=new klasa2;
+  a.b=new klasa;
+  a.b.b=new klasa;
+  a.b.b.d = 2;
+                     //   (9      *6  +           4) *         2
+  a.a().b.b(3,4).c = (b.b(4,5).c.d(6) + b().b().c.d) * a.b.c().d;
+  printInt(a.b.b.c); // 116
+}

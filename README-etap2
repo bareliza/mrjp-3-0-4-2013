@@ -1,0 +1,42 @@
+Kompilacja pliku wykonalnego latc - jak w etapie 1 - polecenie make.
+=================================
+
+Poprawki w porównaniu z poprzednim etapem
+=========================================
+
+Niedociągnięcia zauważone w poprzednim etapie zostały usunięte.
+Pozostał pewien mankament odnośnie analizy leksykalnej - parsowanie literałów
+napisowych - patrz plik README -> użyte biblioteki -> Łatka do leksera
+
+Uruchamianie 
+============
+
+- generacja kodu asemblera JVM dla jasmina oraz bajtkodu
+JVM .class:
+
+  ./latc katalog/plik_zrodlowy.lat
+
+Ważne, aby program uruchamiać z katalogu głównego projektu - tam, gdzie
+znajduje się po wykonaniu 'make' program wykonywalny latc, i, co istotne,
+katalog lib z jasminem. Inaczej nie powstanie plik .class, gdyż nie
+zostanie znaleziony jasmin.
+
+Po uruchomieniu dla poprawnego programu latte powstaną pliki:
+
+katalog/program.j
+katalog/program.class
+
+Aby uruchomić tak powstały bajtkod JVM, wykonujemy polecenie:
+
+java -cp katalog:katalog_z_latc program
+
+lub na przykład
+ 
+cat plik_wejsciowy | java -cp katalog:katalog_z_latc program > plik_wyjsciowy
+
+Pierwszy na liście -cp (classpath) potrzebny jest katalog do pliku
+bajtkodu - nie umieszczam bowiem skompilowanej klasy 'program' w
+żadnym pakiecie, na przykład w rodzaju 'katalog'. Drugi katalog to
+ten, zawierający katalog lib z klasą Runtime[.class] - ta klasa jest
+bowiem skompilowana jako package lib, zatem podajemy katalog o jeden
+wyżej, niż samo lib.

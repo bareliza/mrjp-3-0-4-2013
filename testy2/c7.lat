@@ -1,0 +1,6 @@
+int main(){
+  string a="abc";
+  printInt(3+2*2*2-11);
+  printString("ABC"+a+"ABC");
+  return 0;
+}

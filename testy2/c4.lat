@@ -1,0 +1,20 @@
+int first(int b, int c){
+  return b;
+}
+
+int main(){
+  int a;
+
+  a=readInt();
+  printInt(a);
+  
+  
+  string b;
+  b=readString();
+  printString(b);
+
+  first(2,4);
+  printInt(first(3, 5));
+
+  return a;
+}

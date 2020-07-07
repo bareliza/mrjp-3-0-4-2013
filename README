@@ -1,0 +1,111 @@
+Dalszy ciąg tego tekstu - to co pojawiło się w 2 etapie - znajduje się w
+pliku README-etap2
+
+Kompilator, a w każdym razie pierwszą jego część, czyli frontend,
+zdecydowałem się wykonać w Haskell-u.
+
+Kompilacja
+==========
+
+Aby utworzyć program wykonywalny latc, należy wykonać polecenie make.
+
+Uruchamianie
+============
+
+Szczegóły uruchamiania dla drugiego etapu - generacji kodu JVM w pliku 
+README-etap2
+
+Program uruchamia się poprzez latc -a nazwaPlikuWejściowego
+
+Polecenie wypisuje na stderr stosowne komunikaty o błędach lub
+komunikat OK. Na stdout wypisuje sparsowane drzewo jako 
+reprezentację tekstową haskellowej struktury danych, opisującej
+programy - ale tylko w przypadku udanego rozbioru składniowego.
+Wartość zwracana w przypadku sukcesu to 0. W innym razie jest to
+domyślna wartość porażki programu w haskellu (różna od zera).
+
+Użyte pliki i biblioteki
+========================
+
+Wykorzystuję bnfc i lekko zmodyfikowany dostępny plik Latte.cf.
+Zmiany polegają na zmienieniu słowa kluczowego return, literałów i 
+identyfikatorów na wersje
+zawierające informację o pozycji w kodzie. Dzięki temu mogę z
+dokładnością do nawiasów lokalizować początki i końce wyrażeń. Na tym
+bazuję informację o pozycji błędnego wyrażenia.
+
+Po wygenerowaniu pliku dla leksera i parsera (alex i happy) wprowadzane 
+są do nich łatki ujednolicające komunikaty diagnostyczne z przyjętą prze
+ze mnie konwencją: pozycja błędu wypisuje się jako w:k: gdzie w to
+wiersz a k to kolumna w kodzie analizowanego pliku. Język komunikatów:
+polski. Niestety wspomniane łatki są dosyć przywiązane od danej wersji bnfc.
+Program działa także bez nich, z tym, że komunikat o błędzie składniowym
+jest wtedy po angielsku (syntax error at...).
+
+Łatka dla leksera obejmuje też zmianę wyrażenia regularnego dla
+literałów napisowych, tak aby nie był w nich dopuszczany znak końca
+wiersza. Nie udało mi się uzyskać tego za pomocą standardowych wyrażeń
+regularnych BNFC. Kłopotem było tu przekazanie do pliku wejściowego
+leksera poprawnie wyeskejpowanego znaku końca linii \n. W związku z tym sam 
+plik Latte.cf bez tej łatki jeszcze dopuszcza końce linii wewnątrz
+napisów. Napisy mają jeszcze pewne braki, na przykład dopuszczają
+eskejpowanie dowolnego symbolu, na przykład \s, co może
+spowodować kłopoty dla takich kombinacji znaków - Nie wiem, jak
+potraktuje je haskell przy opereacji read napis :: String.
+
+W tablicy symboli, plik Environment.hs, używam struktury Map ze
+standardowych bibliotek haskellowych - są to zgrubsza dwa słowniki z
+identyfikatorów w typy, jeden dla zmiennych, drugi dla funkcji.
+
+Rozszerzenia
+============
+
+Na obecnym etapie nie wprowadziłem żadnych rozszerzeń, planuję je
+dopiero na etapie backendu LLVM lub x86.
+
+Struktura katalogów
+===================
+mrjp-etap.wersja.podwersja
+ |
+ \_ testy1
+ |    \_ good 
+ |    \_ bad
+ |
+ \_ testy1.1
+ |    \_ good 
+ |    \_ bad
+ |
+ \_ src
+     \_ bnfc
+          \_ diff
+ 
+
+- w katalogu src znajdują się źródła projektu.
+- w katalogach testy1 i testy1.1 znajdują się moje proste testy, 
+  podzielone na bledne (bad) i poprawne (good)
+- w podkatalogu bnfc znajduje się zmodyfikowany plik Latte.cf, z którego
+  jest generowany skryptem mk zestaw plików bnfc
+- w podkatalogu diff znajdują się łatki dla plików parsera i lexera
+  wygenerowanych przez bnfc, opisane w rozdziale "Użyte pliki i
+  biblioteki"
+
+Szczegóły działania
+===================
+
+Jeżeli chodzi o error recovery: w przypadku programów z błędami
+składniowymi program zgłasza tylko jeden błąd, nie parsując dalej pliku.
+Jest to podyktowane wyborem języka programowania i brakiem takiej 
+funkcjonalności w parserze Happy.
+
+Detale języka
+=============
+
+Moja wersja języka nie dopuszcza porównywania stringów i booleanów
+innych, niż równość/nierówność. Wiązałoby się to z napisaniem w
+określonym backendzie / języku niskopoziomowym kilku dodatkowych funkcji.
+Samo porównywanie string-ów co prawda też będzie wymagało jednej funkcji.
+Ponieważ jednak język ma mieć coś wspólnego z Javą, postanowiłem dopuścić
+wymienione tu porównania.
+
+Tablica symboli dla nazw funkcji i zmiennych jest rozdzielona. Zmienna
+może nazywać się tak samo jak jakaś funkcja. Nie ma tu kolizji.

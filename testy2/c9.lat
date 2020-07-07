@@ -1,0 +1,12 @@
+int main(){
+  int a=readInt(),i=0,b=0;
+  
+  while(i<a){
+    if(11+5>10+5)i++;
+    b=b+i;
+  }
+  
+  printInt(b);
+  
+  return 0;
+}

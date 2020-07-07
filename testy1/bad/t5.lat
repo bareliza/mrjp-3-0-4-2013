@@ -1,0 +1,10 @@
+int main(){
+  int i;
+  
+  i=3;
+  
+  if(true)int i=4; // tu chyba powinien być zgłoszony błąd
+  else int i=5;
+  
+  printInt(i);
+}

@@ -1,0 +1,10 @@
+void p(boolean a, boolean b){
+  if(a&b)printString("Nie najlepsze sito.");
+}
+
+int main(){
+  int a=4,b=5;
+  
+  p(a<b,b>a);
+  return 0;
+}

@@ -1,0 +1,124 @@
+-- programs ------------------------------------------------
+entrypoints Program ;
+Program.   Program ::= [TopDef] ;
+FnDef.	   TopDef ::= Type PIdent "(" [Arg] ")" Block ;
+ClassDef.  TopDef ::= PClass PIdent OptExt "{" [Field] "}" ;
+separator nonempty TopDef "" ; 
+
+NoExt.     OptExt ::= ;
+Extends.   OptExt ::= PExtends PIdent ;
+
+FnField.   Field  ::= Type PIdent "(" [Arg] ")" Block ;
+VarField.  Field  ::= Type [VFItem] ";" ;
+separator Field "" ;
+
+VFItem.	   VFItem ::= PIdent;
+separator nonempty VFItem "," ;
+
+Arg. 	   Arg ::= Type PIdent;
+separator  Arg "," ;
+-- statements ----------------------------------------------
+Block.     Block ::= "{" [Stmt] "}" ;
+separator  Stmt "" ;
+Empty.     Stmt ::= ";" ;
+BStmt.     Stmt ::= Block ;
+Decl.      Stmt ::= Type [Item] ";" ;
+NoInit.    Item ::= PIdent ; 
+Init.      Item ::= PIdent "=" Expr ;
+separator nonempty Item "," ;
+Ass.       Stmt ::= [FieldSelector] "=" Expr  ";" ;
+Incr.      Stmt ::= [FieldSelector] "++"  ";" ;
+Decr.      Stmt ::= [FieldSelector] "--"  ";" ;
+Ret.       Stmt ::= PReturn Expr ";" ;
+VRet.      Stmt ::= PReturn ";" ;
+Cond.      Stmt ::= "if" "(" Expr ")" Stmt  ;
+CondElse.  Stmt ::= "if" "(" Expr ")" Stmt "else" Stmt  ;
+While.     Stmt ::= "while" "(" Expr ")" Stmt ;
+SExp.      Stmt ::= Expr  ";" ;
+
+-- PrnInt.     Stmt ::= "printInt" "(" Expr ")" ";" ;
+-- PrnBool.    Stmt ::= "printBool" "(" Expr ")" ";" ;
+-- PrnString.  Stmt ::= "printString" "(" Expr ")" ";" ;
+-- Types ---------------------------------------------------
+Int.       Type ::= "int" ;
+Str.       Type ::= "string" ;
+Bool.      Type ::= "boolean" ;
+Void.      Type ::= "void" ;
+Class.     Type ::= PIdent ;
+internal   Fun. Type ::= Type "(" [Type] ")" ;
+separator  Type "," ;
+-- Expressions ---------------------------------------------
+-- RdInt.     Expr6 ::= "readInt" "(" ")" ";" ;
+-- RdBool.    Expr6 ::= "readBool" "(" ")" ";" ;
+-- RdString.  Expr6 ::= "readString" "(" ")" ";" ;
+
+EFields.   Expr6 ::= [FieldSelector] ;
+-- EApp.      Expr6 ::= [PIdent] "(" [Expr] ")" ;
+ELitInt.   Expr6 ::= PInteger ;
+ELitTrue.  Expr6 ::= PTrue ;
+ELitFalse. Expr6 ::= PFalse ;
+ENull.     Expr6 ::= PNull ;
+EThis.     Expr6 ::= PThis;
+EConstr.   Expr6 ::= PNew PIdent ;
+ECast.     Expr6 ::= "(" PIdent ")" Expr ;
+EString.   Expr6 ::= PString ;
+DNeg.      Expr6 ::= "--" Expr6 ;
+Neg.       Expr6 ::= "-" Expr6 ;
+Not.       Expr6 ::= "!" Expr6 ;
+EMul.      Expr4 ::= Expr4 MulOp Expr5 ;
+EAdd.      Expr3 ::= Expr3 AddOp Expr4 ;
+ERel.      Expr2 ::= Expr2 RelOp Expr3 ;
+EAnd.      Expr1 ::= Expr2 "&&" Expr1 ;
+EOr.       Expr ::= Expr1 "||" Expr ;
+
+coercions  Expr 6 ;
+separator  Expr "," ;
+
+FVar. FieldSelector ::= PIdent ;
+FFun. FieldSelector ::= PIdent "(" [Expr] ")" ;
+separator nonempty FieldSelector "." ;
+-- operators -----------------------------------------------
+Plus.      AddOp ::= "+" ;
+Minus.     AddOp ::= "-" ;
+Times.     MulOp ::= "*" ;
+Div.       MulOp ::= "/" ;
+Mod.       MulOp ::= "%" ;
+LTH.       RelOp ::= "<" ;
+LE.        RelOp ::= "<=" ;
+GTH.       RelOp ::= ">" ;
+GE.        RelOp ::= ">=" ;
+EQU.       RelOp ::= "==" ;
+NE.        RelOp ::= "!=" ;
+-- comments ------------------------------------------------
+comment    "#" ;
+comment    "//" ;
+comment    "/*" "*/" ;
+-- possible error positions --------------------------------
+{-
+Pomysl jest taki, ze o typie decyduja stale badz 
+identyfikatory, a kontrola semantyczna wylapuje wszelkie
+konflikty typow oraz powtarzajace sie w obrebie bloku
+deklaracje identyfikatorow. Miejsca tych deklaracji 
+jako lokalizacje konkretnych identyfikatorow w owych 
+deklaracjach otrzymujemy dzieki linijce opisujacej
+token PIdent - zapewnia ta informacje slowo position.
+Wspomniane wczesniej wszelkie stale sa zadeklarowane w 
+kolejnych linijkach. Do kazdej zostanie dolaczona informacja
+o pozycji wystapienia w miejscu kodu programu.
+-}
+
+position token PReturn {"return"} ;
+position token PTrue {"true"} ;
+position token PFalse {"false"} ;
+position token PNull {"null"} ;
+position token PThis {"this"} ;
+position token PNew {"new"} ;
+position token PClass {"class"} ;
+position token PExtends {"extends"} ;
+position token PIdent (letter (letter | digit | '_')*) ;
+position token PInteger 
+  ( ((["123456789"]) (digit)*) | ('0')+ ) ;
+position token PString 
+  ( '"' ( '\\' '"' | (char-'"'))* '"' ) ;
+-- extended string - may be multiline
+-- that is corrected by pathing a lexer file LexLatte.x

@@ -1,0 +1,4 @@
+int main(){
+  if (true>false)return 0;
+  if ("a"<="b")return 1;
+}

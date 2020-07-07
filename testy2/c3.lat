@@ -1,0 +1,13 @@
+int main(){
+  int a;
+
+  a=readInt();
+  printInt(a);
+  
+  
+  string b;
+  b=readString();
+  printString(b);
+
+  return a;
+}

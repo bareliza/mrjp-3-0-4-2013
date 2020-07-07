@@ -1,0 +1,21 @@
+// 6 błędów:
+// - int inicjalizowany bool-em 
+// ale tu typ nieustalony, zatem pewnie nie ma dodatkowego błędu
+
+// - porównanie różnych typów
+// - negacja logiczna int-a
+// - porównanie stringów (tego chyba w javie nie ma?)
+// - negacja stringa
+// - jw. logiczna
+// - różnica zamiast sumy stringów 
+
+int main(){
+  int i=3>"abc",j=!4;
+  boolean a;
+  a = "a">"c";
+  {
+    string i=-"q",b=!"beł",c="qwe"-"rty";
+  }
+
+  return 0;
+}

@@ -1,0 +1,18 @@
+int main(){
+  return 0;
+}
+int error(){
+  return 0;
+}
+int printString(){
+  return 0;
+}
+int printInt(){
+  return 0;
+}
+int readString(){
+  return 0;
+}
+int readInt(){
+  return 0;
+}

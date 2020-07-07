@@ -1,0 +1,7 @@
+69,70c69,71
+< tokenPos (PT (Pn _ l _) _ :_) = "line " ++ show l
+< tokenPos (Err (Pn _ l _) :_) = "line " ++ show l
+---
+> tokenPos (PT (Pn _ l c) _ :_) = show l ++ ":" ++ show c ++ ": "
+> tokenPos (Err (Pn _ l c) :_) =  show l ++ ":" ++ show c ++ ": "
+> 

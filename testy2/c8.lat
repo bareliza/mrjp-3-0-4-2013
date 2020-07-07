@@ -1,0 +1,12 @@
+int main(){
+  int a=readInt(),i=0,b=0;
+  
+  while(i<a){
+    i++;
+    b=b+i;
+  }
+  
+  printInt(b);
+  
+  return 0;
+}

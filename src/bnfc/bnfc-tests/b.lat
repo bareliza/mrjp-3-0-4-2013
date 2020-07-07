@@ -1,0 +1,5 @@
+int main(){
+  int a=(klasa2)null;
+
+  int b=(klasa3)null;
+}

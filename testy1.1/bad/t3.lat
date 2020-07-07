@@ -1,0 +1,6 @@
+void c(void i, void j){
+}
+
+int main(){
+  return 0;
+}

@@ -1,0 +1,6 @@
+int main(){
+  string s = "ab";
+  int i = 30, j = 0, k = 00000;
+
+  return 0;
+}
